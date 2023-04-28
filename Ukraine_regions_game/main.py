@@ -33,10 +33,7 @@ while game_is_on:
                                      prompt="What's another state's name?").lower()
 
     if answer_region == 'exit':
-        missing_states = []
-        for region in names_of_regions:
-            if region not in guessed_states:
-                missing_states.append(region)
+        missing_states = [region for region in names_of_regions if region not in guessed_states]
         new_data = pandas.DataFrame(missing_states)
         new_data.to_csv("Regions_to_learn.csv")
         break
