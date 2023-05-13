@@ -6,6 +6,7 @@ class DataManager:
     # This class is responsible for talking to the Google Sheet.
     def __init__(self):
         self.URL = 'https://api.sheety.co/afc5d065101c9878aa70979681937148/flightDeals/prices'
+        self.USER_ENDPOINT = "https://api.sheety.co/afc5d065101c9878aa70979681937148/flightDeals/users"
 
         self.destination_data = {}
 
@@ -28,3 +29,10 @@ class DataManager:
                 json=new_data
             )
             print(response.text)
+
+    def get_customer_emails(self):
+        customers_endpoint = self.USER_ENDPOINT
+        response = requests.get(customers_endpoint)
+        data = response.json()
+        self.customer_data = data["users"]
+        return self.customer_data
